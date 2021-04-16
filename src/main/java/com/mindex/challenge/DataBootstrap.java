@@ -3,6 +3,7 @@ package com.mindex.challenge;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.data.ReportingStructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +24,21 @@ public class DataBootstrap {
     @PostConstruct
     public void init() {
         InputStream inputStream = this.getClass().getResourceAsStream(DATASTORE_LOCATION);
+        InputStream input = this.getClass().getResourceAsStream(DATASTORE_LOCATION);
 
         Employee[] employees = null;
+        ReportingStructure[] reporting = null;
 
         try {
             employees = objectMapper.readValue(inputStream, Employee[].class);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try{
+            reporting = objectMapper.readValue(input, ReportingStructure[].class);
+        }
+        catch (IOException e){
             throw new RuntimeException(e);
         }
 
