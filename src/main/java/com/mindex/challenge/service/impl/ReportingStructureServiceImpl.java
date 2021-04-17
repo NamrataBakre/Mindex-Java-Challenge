@@ -25,9 +25,8 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
 
     @Override
     public ReportingStructure read(String id){
-        LOG.debug("Creating employee with id [{}]", id);
+        LOG.debug("Reading employee with id [{}]", id);
         Queue<Employee> reportResult = new LinkedList<>();
-        //ReportingStructure employeeReport = employeeRepository.findByEmployeeId(id);
         Employee employee = employeeRepository.findByEmployeeId(id);
         ReportingStructure employeeReport = new ReportingStructure();
         employeeReport.setEmployee(employee);

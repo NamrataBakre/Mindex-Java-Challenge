@@ -2,6 +2,8 @@ package com.mindex.challenge;
 
 import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.data.ReportingStructure;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,14 @@ public class DataBootstrapTest {
         assertEquals("Lennon", employee.getLastName());
         assertEquals("Development Manager", employee.getPosition());
         assertEquals("Engineering", employee.getDepartment());
+
+        ReportingStructure repStruct = new ReportingStructure();
+        Employee testEmp = employeeRepository.findByEmployeeId("03aa1462-ffa9-4978-901b-7c001562cf6f");
+        repStruct.setEmployee(testEmp);
+        assertNotNull(repStruct);
+        assertEquals("Ringo", repStruct.getEmployee().getFirstName());
+        assertEquals("Starr", repStruct.getEmployee().getLastName());
+        assertEquals("Developer V", repStruct.getEmployee().getPosition());
+        assertEquals("Engineering", repStruct.getEmployee().getDepartment());
     }
 }
